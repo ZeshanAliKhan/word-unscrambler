@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://zeshan-word-unscrambler.netlify.app/sitemap.xml
+Sitemap: https://zeshan-word-unscrambler-876.netlify.app/sitemap.xml
