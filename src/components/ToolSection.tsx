@@ -1,8 +1,8 @@
 import { useState } from 'react';
+import { Search, X } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
-import { Search, X } from 'lucide-react';
 
 interface ToolSectionProps {
   onSearch: (letters: string, filters: {
@@ -17,11 +17,11 @@ interface ToolSectionProps {
 }
 
 const EXAMPLE_SEARCHES = [
-  { label: 'CAT', value: 'CAT' },
-  { label: 'DOG', value: 'DOG' },
-  { label: 'STARE', value: 'STARE' },
-  { label: 'PUZZLE', value: 'PUZZLE' },
+  { label: 'LISTEN', value: 'LISTEN' },
   { label: 'GARDEN', value: 'GARDEN' },
+  { label: 'PLANET', value: 'PLANET' },
+  { label: 'ORANGE', value: 'ORANGE' },
+  { label: 'SCHOOL', value: 'SCHOOL' },
   { label: '?ATE', value: '?ATE' },
 ];
 
@@ -87,11 +87,22 @@ export function ToolSection({ onSearch, onClear, isSearching }: ToolSectionProps
   };
 
   return (
-    <section id="word-unscrambler-tool" className="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 md:p-8">
+    <section id="word-unscrambler-tool" className="rounded-3xl border border-stone-200 bg-white p-5 shadow-sm md:p-6">
       <form onSubmit={handleSubmit}>
-        <div className="mb-6">
-          <Label htmlFor="letters" className="text-base font-semibold text-slate-700 mb-2 block">
-            Enter Your Letters
+        <div className="mb-5">
+          <div className="mb-3 flex items-start justify-between gap-4">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-wide text-emerald-700">Search from letters</p>
+              <h2 className="mt-1 text-2xl font-bold tracking-tight text-stone-900">Find words fast</h2>
+            </div>
+            <div className="hidden rounded-2xl border border-stone-200 bg-stone-50 px-3 py-2 text-right text-xs text-stone-600 sm:block">
+              <div>Grouped by length</div>
+              <div>Click any word to copy</div>
+            </div>
+          </div>
+
+          <Label htmlFor="letters" className="mb-2 block text-base font-semibold text-stone-700">
+            Enter letters or wildcard tiles
           </Label>
           <div className="relative">
             <Input
@@ -99,20 +110,20 @@ export function ToolSection({ onSearch, onClear, isSearching }: ToolSectionProps
               type="text"
               value={letters}
               onChange={handleLettersChange}
-              placeholder="Enter letters, like TCA or DGO"
-              className="text-xl h-14 px-4 pr-24 border-2 border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
+              placeholder="Try letters like LISTEN or ?ATE"
+              className="h-14 border-2 border-stone-300 px-4 pr-24 text-xl transition-all focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
               aria-describedby="letters-help"
             />
-            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-slate-400">
+            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-stone-400">
               {letters.length}/15
             </span>
           </div>
-          <p id="letters-help" className="text-sm text-slate-500 mt-2">
-            Use <code className="bg-slate-100 px-1.5 py-0.5 rounded text-slate-700">?</code> or <code className="bg-slate-100 px-1.5 py-0.5 rounded text-slate-700">*</code> as a blank tile/wildcard.
+          <p id="letters-help" className="mt-2 text-sm text-stone-500">
+            Use <code className="rounded bg-stone-100 px-1.5 py-0.5 text-stone-700">?</code> or <code className="rounded bg-stone-100 px-1.5 py-0.5 text-stone-700">*</code> as a blank tile. The tool cleans symbols automatically and keeps duplicate letters honest.
           </p>
           {error && (
-            <p className="text-red-500 text-sm mt-2 flex items-center gap-1">
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <p className="mt-2 flex items-center gap-1 text-sm text-red-500">
+              <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
               </svg>
               {error}
@@ -120,15 +131,15 @@ export function ToolSection({ onSearch, onClear, isSearching }: ToolSectionProps
           )}
         </div>
 
-        <div className="mb-6">
-          <p className="text-sm font-medium text-slate-600 mb-3">Quick Examples:</p>
+        <div className="mb-5">
+          <p className="mb-3 text-sm font-medium text-stone-600">Quick examples</p>
           <div className="flex flex-wrap gap-2">
             {EXAMPLE_SEARCHES.map((example) => (
               <button
                 key={example.value}
                 type="button"
                 onClick={() => handleExampleClick(example.value)}
-                className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-sm font-medium transition-colors border border-slate-200 hover:border-slate-300"
+                className="rounded-full border border-stone-200 bg-stone-100 px-3 py-1.5 text-sm font-medium text-stone-700 transition-colors hover:border-stone-300 hover:bg-stone-200"
               >
                 {example.label}
               </button>
@@ -136,23 +147,23 @@ export function ToolSection({ onSearch, onClear, isSearching }: ToolSectionProps
           </div>
         </div>
 
-        <div className="mb-6">
+        <div className="mb-4">
           <button
             type="button"
             onClick={() => setShowAdvanced(!showAdvanced)}
-            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium text-sm"
+            className="flex items-center gap-2 text-sm font-medium text-emerald-700 hover:text-emerald-800"
           >
-            <svg className={`w-4 h-4 transition-transform ${showAdvanced ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className={`h-4 w-4 transition-transform ${showAdvanced ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
             </svg>
-            Advanced Filters
+            {showAdvanced ? 'Hide filters' : 'Show filters'}
           </button>
         </div>
 
         {showAdvanced && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6 p-4 bg-slate-50 rounded-xl border border-slate-200">
+          <div className="mb-5 grid grid-cols-1 gap-4 rounded-2xl border border-stone-200 bg-stone-50 p-4 md:grid-cols-2 lg:grid-cols-4">
             <div>
-              <Label htmlFor="startsWith" className="text-sm font-medium text-slate-600 mb-1.5 block">
+              <Label htmlFor="startsWith" className="mb-1.5 block text-sm font-medium text-stone-600">
                 Starts With
               </Label>
               <Input
@@ -166,7 +177,7 @@ export function ToolSection({ onSearch, onClear, isSearching }: ToolSectionProps
               />
             </div>
             <div>
-              <Label htmlFor="endsWith" className="text-sm font-medium text-slate-600 mb-1.5 block">
+              <Label htmlFor="endsWith" className="mb-1.5 block text-sm font-medium text-stone-600">
                 Ends With
               </Label>
               <Input
@@ -180,7 +191,7 @@ export function ToolSection({ onSearch, onClear, isSearching }: ToolSectionProps
               />
             </div>
             <div>
-              <Label htmlFor="contains" className="text-sm font-medium text-slate-600 mb-1.5 block">
+              <Label htmlFor="contains" className="mb-1.5 block text-sm font-medium text-stone-600">
                 Contains
               </Label>
               <Input
@@ -194,14 +205,14 @@ export function ToolSection({ onSearch, onClear, isSearching }: ToolSectionProps
               />
             </div>
             <div>
-              <Label htmlFor="wordLength" className="text-sm font-medium text-slate-600 mb-1.5 block">
+              <Label htmlFor="wordLength" className="mb-1.5 block text-sm font-medium text-stone-600">
                 Word Length
               </Label>
               <select
                 id="wordLength"
                 value={wordLength}
                 onChange={(e) => setWordLength(e.target.value)}
-                className="w-full h-10 px-3 border border-slate-300 rounded-lg bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
+                className="h-10 w-full rounded-lg border border-stone-300 bg-white px-3 text-stone-700 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-100"
               >
                 <option value="any">Any length</option>
                 <option value="2">2 letters</option>
@@ -217,15 +228,15 @@ export function ToolSection({ onSearch, onClear, isSearching }: ToolSectionProps
           </div>
         )}
 
-        <div className="mb-6">
-          <Label htmlFor="sortBy" className="text-sm font-medium text-slate-600 mb-1.5 block">
+        <div className="mb-5">
+          <Label htmlFor="sortBy" className="mb-1.5 block text-sm font-medium text-stone-600">
             Sort Results By
           </Label>
           <select
             id="sortBy"
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="w-full md:w-64 h-10 px-3 border border-slate-300 rounded-lg bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
+            className="h-10 w-full rounded-lg border border-stone-300 bg-white px-3 text-stone-700 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-100 md:w-64"
           >
             <option value="longest">Longest words first</option>
             <option value="shortest">Shortest words first</option>
@@ -238,11 +249,11 @@ export function ToolSection({ onSearch, onClear, isSearching }: ToolSectionProps
           <Button
             type="submit"
             disabled={isSearching}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center gap-2"
+            className="flex items-center gap-2 rounded-xl bg-emerald-600 px-8 py-3 text-lg font-semibold text-white shadow-sm transition-all hover:bg-emerald-700"
           >
             {isSearching ? (
               <>
-                <svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
+                <svg className="h-5 w-5 animate-spin" fill="none" viewBox="0 0 24 24">
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                 </svg>
@@ -250,8 +261,8 @@ export function ToolSection({ onSearch, onClear, isSearching }: ToolSectionProps
               </>
             ) : (
               <>
-                <Search className="w-5 h-5" />
-                Unscramble Words
+                <Search className="h-5 w-5" />
+                Find Words
               </>
             )}
           </Button>
@@ -259,11 +270,26 @@ export function ToolSection({ onSearch, onClear, isSearching }: ToolSectionProps
             type="button"
             variant="outline"
             onClick={handleClear}
-            className="px-6 py-3 text-lg font-medium rounded-xl border-2 border-slate-300 hover:bg-slate-50 flex items-center gap-2"
+            className="flex items-center gap-2 rounded-xl border-2 border-stone-300 px-6 py-3 text-lg font-medium hover:bg-stone-50"
           >
-            <X className="w-5 h-5" />
+            <X className="h-5 w-5" />
             Clear
           </Button>
+        </div>
+
+        <div className="mt-5 grid gap-3 sm:grid-cols-3">
+          <div className="rounded-2xl border border-stone-200 bg-stone-50 p-3">
+            <p className="text-xs font-semibold uppercase tracking-wide text-stone-500">Wildcard help</p>
+            <p className="mt-1 text-sm leading-6 text-stone-600">Use one blank tile when you know most letters, and two only when the search would otherwise miss too many options.</p>
+          </div>
+          <div className="rounded-2xl border border-stone-200 bg-stone-50 p-3">
+            <p className="text-xs font-semibold uppercase tracking-wide text-stone-500">Filter tip</p>
+            <p className="mt-1 text-sm leading-6 text-stone-600">If the result list gets noisy, start with a known prefix, suffix, or target length before you search again.</p>
+          </div>
+          <div className="rounded-2xl border border-stone-200 bg-stone-50 p-3">
+            <p className="text-xs font-semibold uppercase tracking-wide text-stone-500">Copy flow</p>
+            <p className="mt-1 text-sm leading-6 text-stone-600">Click any result chip to copy one word, or use the full copy button if you want the whole list in one shot.</p>
+          </div>
         </div>
       </form>
     </section>

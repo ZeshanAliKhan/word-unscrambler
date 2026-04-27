@@ -3,36 +3,36 @@ import { FAQItem } from '../types';
 
 const FAQ_DATA: FAQItem[] = [
   {
-    question: 'What is a word unscrambler?',
-    answer: 'A word unscrambler is a tool that rearranges letters and finds possible words that can be made from those letters.',
+    question: 'What does a word unscrambler do?',
+    answer: 'It takes the letters you enter and shows real words that can be built from them, while respecting repeats and any wildcard tiles you use.',
   },
   {
-    question: 'How do I unscramble letters?',
-    answer: 'Enter your letters into the tool, use optional filters if needed, and click Unscramble Words. The tool will show words that can be made from your letters.',
+    question: 'How should I use this tool for the fastest results?',
+    answer: 'Start with your full letter set and run the search once. If the list is too wide, add a prefix, suffix, contains pattern, or target length to narrow it quickly.',
   },
   {
-    question: 'Can I use wildcards?',
-    answer: 'Yes. You can use ? or * as wildcard characters. Each wildcard can represent one missing or blank letter.',
+    question: 'Can I use a blank tile or unknown letter?',
+    answer: 'Yes. Use ? or * as a wildcard. Each wildcard can stand in for one missing letter.',
   },
   {
-    question: 'Can this tool find words for word games?',
-    answer: 'Yes. This tool can help find word ideas for word games, puzzles, anagrams, and classroom activities. However, every game may use a different dictionary.',
+    question: 'Does it work for word games and anagrams?',
+    answer: 'Yes. It is useful for anagrams, letter puzzles, spelling drills, and board-style word games. Dictionary acceptance can still vary from one game to another.',
   },
   {
-    question: 'Does this word unscrambler work offline?',
-    answer: 'The tool works in the browser using a local word list after the page loads. It does not require a paid API or backend.',
+    question: 'Why might a word be missing?',
+    answer: 'The tool uses a local word list, so some rare, niche, or game-specific entries may not appear. That is normal for browser-based dictionaries.',
   },
   {
-    question: 'Why are some words missing?',
-    answer: 'The first version uses a built-in word list. Some rare words may not appear. The word list can be expanded later with a larger free dictionary file.',
+    question: 'Does the tool need a backend or paid API?',
+    answer: 'No. It runs in the browser with a local word list, which keeps it fast and free to use.',
   },
   {
     question: 'Is this word unscrambler free?',
-    answer: 'Yes. This word unscrambler is free to use and does not require signup.',
+    answer: 'Yes. There is no signup wall and no paid API behind the search.',
   },
   {
     question: 'What is the difference between a word unscrambler and an anagram solver?',
-    answer: 'A word unscrambler finds words from a set of letters. An anagram solver usually focuses on rearranging all letters to form a new word or phrase. Many tools can do both.',
+    answer: 'A word unscrambler finds as many valid words as it can from your letters. An anagram solver is usually stricter and often focuses on rearranging every letter into an exact full match.',
   },
 ];
 
@@ -44,22 +44,22 @@ export function FAQSection() {
   };
 
   return (
-    <section id="word-unscrambler-faq" className="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 md:p-8">
-      <h2 className="text-2xl font-bold text-slate-800 mb-6">Frequently Asked Questions</h2>
+    <section id="word-unscrambler-faq" className="rounded-3xl border border-stone-200 bg-white p-6 shadow-sm md:p-8">
+      <h2 className="mb-6 text-2xl font-bold text-stone-900">Frequently asked questions</h2>
       <div className="space-y-3">
         {FAQ_DATA.map((faq, index) => (
           <div
             key={index}
-            className="border border-slate-200 rounded-xl overflow-hidden"
+            className="overflow-hidden rounded-2xl border border-stone-200"
           >
             <button
               onClick={() => toggleFAQ(index)}
-              className="w-full flex items-center justify-between p-4 text-left bg-white hover:bg-slate-50 transition-colors"
+              className="flex w-full items-center justify-between bg-white p-4 text-left transition-colors hover:bg-stone-50"
               aria-expanded={openIndex === index}
             >
-              <span className="font-semibold text-slate-700">{faq.question}</span>
+              <span className="font-semibold text-stone-800">{faq.question}</span>
               <svg
-                className={`w-5 h-5 text-slate-500 transition-transform ${openIndex === index ? 'rotate-180' : ''}`}
+                className={`h-5 w-5 text-stone-500 transition-transform ${openIndex === index ? 'rotate-180' : ''}`}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -68,7 +68,7 @@ export function FAQSection() {
               </svg>
             </button>
             {openIndex === index && (
-              <div className="px-4 pb-4 text-slate-600">
+              <div className="px-4 pb-4 leading-7 text-stone-600">
                 {faq.answer}
               </div>
             )}
@@ -82,7 +82,7 @@ export function FAQSection() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            "mainEntity": FAQ_DATA.map(faq => ({
+            "mainEntity": FAQ_DATA.map((faq) => ({
               "@type": "Question",
               "name": faq.question,
               "acceptedAnswer": {
