@@ -52,8 +52,12 @@ export default function App() {
       <section className="border-b border-stone-200 bg-gradient-to-b from-emerald-50 via-white to-white">
         <div className="mx-auto max-w-6xl px-4 py-5 md:py-7">
           <div className="grid gap-5 xl:grid-cols-[0.95fr_1.05fr] xl:items-start">
-            <Header />
-            <ToolSection onSearch={handleSearch} onClear={handleClear} isSearching={isSearching} />
+            <div className="order-2 xl:order-1">
+              <Header />
+            </div>
+            <div className="order-1 xl:order-2">
+              <ToolSection onSearch={handleSearch} onClear={handleClear} isSearching={isSearching} />
+            </div>
           </div>
         </div>
       </section>
